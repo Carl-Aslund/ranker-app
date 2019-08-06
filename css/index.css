@@ -1,0 +1,20 @@
+body {
+    padding: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+p {
+    line-height: 1.4;
+}
+
+#footer {
+    position:absolute;
+    width:300px;
+    height:30px;
+    margin-left:-150px;
+    bottom:20px;
+    left:50%;
+}

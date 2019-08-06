@@ -1,0 +1,22 @@
+{
+  "name": "ranker-app",
+  "version": "0.1.0",
+  "description": "A repository for experimenting with Electron and Typescript.",
+  "main": "main.ts",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carl-Aslund/ranker-app.git"
+  },
+  "author": "Carl Aslund",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Carl-Aslund/ranker-app/issues"
+  },
+  "homepage": "https://github.com/Carl-Aslund/ranker-app#readme",
+  "dependencies": {
+    "electron": "^6.0.0"
+  }
+}
