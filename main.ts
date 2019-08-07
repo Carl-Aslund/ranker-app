@@ -1,9 +1,14 @@
-const {app, BrowserWindow, Menu, dialog, ipcRenderer} = require('electron');
+const { app, BrowserWindow, Menu, dialog } = require('electron');
 // const ipc = require('electron').ipcRenderer;
 const fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
 
 let win;
 var entryText = "";
+var comparisons = 0;
+
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
 
 function sortEntries(){
   // TODO: Connect to a button
@@ -13,6 +18,8 @@ function sortEntries(){
   // Mergesort them in helper function
   let sortedEntries = mergeSort(entries)
   // TODO: Render popup list of results
+  console.log(sortedEntries);
+  console.log(comparisons);
 }
 
 function mergeSort(entries){
@@ -35,7 +42,7 @@ function mergeSort(entries){
 }
 
 function merge(left, right){
-  // TODO: Implement merge method
+  // Merge two sorted lists of entries
   let resultArray = [], leftIndex = 0, rightIndex = 0;
 
   // We will concatenate values into the resultArray in order
@@ -58,18 +65,17 @@ function merge(left, right){
 }
 
 function compare(entry1, entry2){
-  // Determine if entry2 is greater than entry1 by asking the user to decide
-  // TODO: Implement compare method
-  // TODO: Create popup window to compare the two
-  // TODO: Get result of comparison
-  // If entry1 is chosen, return false
-  // If entry2 is chosen, return true
-  var result = null;
-  ipcRenderer.on('choice', (event, arg) => {
-    result = arg;
-  });
-  while (result === null) { }
-  return result;
+  // Determine if entry1 is greater than entry2 by asking the user to decide
+  // TODO: Instead of popup, modify window
+  comparisons++;
+  const options = {
+    type: 'question',
+    buttons: [entry2, entry1],
+    message: 'Choice',
+    detail: 'Which option do you prefer?'
+  }
+  const response = dialog.showMessageBoxSync(options);
+  return (response == 1);
 }
 
 function createWindow(){
@@ -126,10 +132,16 @@ function createWindow(){
   Menu.setApplicationMenu(menu);
 
   // Create browser window
-  win = new BrowserWindow({width: 500, height: 600});
+  win = new BrowserWindow({
+    width: 500, 
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
 
   // Load index.html
-  win.loadFile('index.html');
+  win.loadFile('views/index.html');
 
   // Unload window when closed
   win.on('closed', () => {
