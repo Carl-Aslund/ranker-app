@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Carl-Aslund/ranker-app#readme",
   "dependencies": {
-    "electron": "^6.0.0"
+    "electron": "^7.2.4"
   }
 }
